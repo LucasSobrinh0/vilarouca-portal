@@ -7,6 +7,7 @@ class Atendimento(models.Model):
         ('aceito', 'Aceito'),
         ('em_atendimento', 'Em Atendimento'),
         ('atendido', 'Atendido'),
+        ('cancelado', 'Cancelado'),
     ]
 
     cliente = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='cliente_atendimentos')

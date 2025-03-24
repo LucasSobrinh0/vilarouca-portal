@@ -26,7 +26,14 @@ SECRET_KEY = 'django-insecure-cjb%^kff#+aq1bgd-!j5w3%^mmun6ev^!cyj3(@z^wa1hmqreb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 
 # Application definition
@@ -44,7 +51,8 @@ INSTALLED_APPS = [
     'corsheaders',  # Para permitir requisições entre diferentes origens, se necessário
     'chat',
     'schedule',
-    'attendance'
+    'attendance',
+    'tickets',
 ]
 
 REST_FRAMEWORK = {
@@ -63,13 +71,15 @@ SIMPLE_JWT = {
 }
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # TOPO
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # CORS
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="1; url=../../login.html" />
+  <title>Saindo...</title>
+</head>
+<body>
+  <script>
+    // Remove o cookie de access token
+    document.cookie = "access=; path=/; max-age=0; secure; samesite=strict";
+
+    // Você também pode limpar localStorage se estiver usando
+    // localStorage.removeItem("refresh");
+
+    // Redireciona manualmente para login (caso refresh não funcione)
+    window.location.href = "../../login.html";
+  </script>
+
+  <p style="color: white; text-align: center;">Você está sendo deslogado...</p>
+</body>
+</html>

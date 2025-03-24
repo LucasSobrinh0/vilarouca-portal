@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/css/login.css" />
+  <title>Vilarouca Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="../static/img/logo.webp" alt="Vilarouca Portal" />
+    </div>
+    <div class="login-container">
+      <form id="loginForm">
+        <h1>Bem-vindo ao Vilarouca</h1>
+        <input type="text" name="username" placeholder="Usuário" required />
+        <input type="password" name="password" placeholder="Senha" required />
+        <button type="submit">Entrar</button>
+        <p id="error-message" style="color: red; display: none; text-align: center; margin-top: 0.5rem;"></p>
+      </form>
+    </div>
+  </div>
+  <script src="../static/js/login.js"></script>
+</body>
+</html>
