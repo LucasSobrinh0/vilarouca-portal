@@ -3,34 +3,45 @@ from django.contrib.auth.hashers import make_password
 from .models import CustomUser, Company
 
 class UserSerializer(serializers.ModelSerializer):
+    # Permite associar várias empresas ao usuário (ManyToMany)
     companies = serializers.PrimaryKeyRelatedField(
-        many=True,
-        queryset=Company.objects.all(),
-        required=False)
+        many=True,  # Pode receber múltiplas empresas
+        queryset=Company.objects.all(),  # De onde buscar essas empresas
+        required=False  # Campo opcional
+    )
 
     class Meta:
-        model = CustomUser
-        fields = ['id', 'username', 'password', 'role', 'companies']
-        extra_kwargs = {'password': {'write_only': True}}
+        model = CustomUser  # Define o modelo a ser serializado
+        fields = ['id', 'username', 'password', 'role', 'companies']  # Campos que serão expostos na API
+        extra_kwargs = {'password': {'write_only': True}}  # Senha só pode ser enviada, não retornada
 
     def create(self, validated_data):
+        # Extrai e remove a senha dos dados validados
         password = validated_data.pop('password')
+        # Extrai empresas se tiverem sido enviadas (pode ser vazio)
         companies = validated_data.pop('companies', [])
+        # Cria o usuário sem senha (ainda não criptografada)
         user = CustomUser.objects.create(**validated_data)
+        # Criptografa a senha
         user.password = make_password(password)
         user.save()
+        # Associa empresas ao usuário
         user.companies.set(companies)
         return user
-    
+
     def update(self, instance, validated_data):
+        # Se uma nova senha for enviada, criptografa e atualiza
         password = validated_data.pop('password', None)
         companies = validated_data.pop('companies', None)
+
         if password:
             instance.password = make_password(password)
-        
-        if companies:
-            instance.companies.set(companies)   
 
+        # Atualiza as empresas associadas
+        if companies:
+            instance.companies.set(companies)
+
+        # Atualiza os demais campos
         return super().update(instance, validated_data)
 
 class CompanySerializer(serializers.ModelSerializer):

@@ -1,0 +1,38 @@
+/* ticket.css - Estilo básico para página de Tickets */
+
+/* Card de abertura de ticket */
+.card {
+  background-color: #2b2b2b !important; /* Contraste no dark */
+  border-radius: 8px;
+}
+
+/* Inputs do formulário */
+#ticketForm .form-control {
+  background-color: #1f1f1f;
+  border: 1px solid #666;
+  color: #fff;
+}
+
+#ticketForm .form-control:focus {
+  background-color: #2b2b2b;
+  border-color: #999;
+  color: #fff;
+}
+
+/* Botão de envio */
+#ticketForm button[type="submit"] {
+  margin-top: 1rem;
+}
+
+/* Mensagens de erro/sucesso */
+#mensagem {
+  font-weight: 600;
+}
+
+#mensagem.sucesso {
+  color: #39ff14; /* verde */
+}
+
+#mensagem.erro {
+  color: #ff3131; /* vermelho */
+}

@@ -21,4 +21,4 @@ class CustomUser(AbstractUser):
     companies = models.ManyToManyField(Company, related_name='users', blank=True)
 
     def __str__(self):
-        return f"{self.username} - {self.role}"
+        return f"{self.get_full_name() or self.username} ({self.role})"

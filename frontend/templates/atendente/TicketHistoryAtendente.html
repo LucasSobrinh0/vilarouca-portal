@@ -37,8 +37,8 @@
     <aside class="sidebar" id="sidebarMenu">
       <nav>
         <ul>
-          <li><a href="dashboard_atendente.html" class="active"><i class="bi bi-chat-dots"></i> Atendimentos</a></li>
-          <li><a href="TicketHistoryAtendente.html"><i class="bi bi-clock-history"></i> Histórico de Atendimentos</a></li>
+          <li><a href="dashboard_atendente.html"><i class="bi bi-chat-dots"></i> Atendimentos</a></li>
+          <li><a href="TicketHistoryAtendente.html" class="active"><i class="bi bi-clock-history"></i> Histórico de Atendimentos</a></li>
           <li><a href="agendar.html"><i class="bi bi-calendar-plus"></i> Agendar Atendimento</a></li>
           <li><a href="listar_agendamentos.html"><i class="bi bi-calendar-check"></i> Listar Agendamentos</a></li>
         </ul>
@@ -46,17 +46,14 @@
     </aside>
 
     <main class="main-content p-4">
-      <h2>Atendimentos Ativos</h2>
-      <div class="d-flex align-items-center gap-3 mb-4">
-        <label for="filtroStatus" class="text-white fw-semibold mb-0">Filtrar por status:</label>
-        <select id="filtroStatus" class="form-select w-auto">
-          <option value="ativos">Abertos e Em Andamento</option>
-          <option value="aberto">Apenas Abertos</option>
-          <option value="em_andamento">Apenas Em Andamento</option>
-          <!-- <option value="todos">Todos</option> -->
-        </select>
-      </div>
-
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Histórico de Atendimentos</h2>
+            <select id="filtroStatus" class="form-select w-auto">
+              <option value="todos">Todos</option>
+              <option value="fechado">Somente Finalizados</option>
+              <option value="sem_solucao">Somente Sem Solução</option>
+            </select>
+          </div>
       <div id="atendimentos-container" class="mt-4"></div>
     </main>
   </div>
@@ -66,7 +63,7 @@
   <script src="../../static/js/logoff.js"></script>
   <script src="../../static/js/UserName.js"></script>
   <script src="../../static/js/GetCookie.js"></script>
-  <script src="../../static/js/DashboardTicketsAtendente.js"></script>
+  <script src="../../static/js/TicketHistoryAtendente.js"></script>
 </body>
 
 </html>
