@@ -16,12 +16,15 @@ class UserCreateView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAdminUser]  # Alterar para [AllowAny] se quiser cadastro aberto.
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+def create(self, request, *args, **kwargs):
+    data = request.data.copy()
+    if 'username' in data:
+        data['username'] = data['username'].lower()
 
+    serializer = self.get_serializer(data=data)
+    serializer.is_valid(raise_exception=True)
+    self.perform_create(serializer)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class UserListView(generics.ListAPIView):

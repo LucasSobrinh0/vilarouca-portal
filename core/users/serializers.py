@@ -43,6 +43,9 @@ class UserSerializer(serializers.ModelSerializer):
 
         # Atualiza os demais campos
         return super().update(instance, validated_data)
+    
+    def validate_username(self, value):
+        return value.lower()
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta:

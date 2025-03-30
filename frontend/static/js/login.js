@@ -5,7 +5,7 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(form);
-  const username = formData.get("username");
+  const username = formData.get("username").toLocaleLowerCase();
   const password = formData.get("password");
 
   try {
