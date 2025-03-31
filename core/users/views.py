@@ -6,7 +6,6 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework import status
 from rest_framework.response import Response
 
-
 class UserCreateView(generics.CreateAPIView):
     """
     Permite que novos usuários sejam criados. Se quiser que somente admins possam cadastrar,
@@ -113,3 +112,21 @@ class CurrentUserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+    
+
+class DashboardUsuariosAPIView(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        total = CustomUser.objects.count()
+        clientes = CustomUser.objects.filter(role='cliente').count()
+        atendentes = CustomUser.objects.filter(role='atendente').count()
+        admins = CustomUser.objects.filter(role='administrator').count()
+
+        return Response({
+            "total": total,
+            "clientes": clientes,
+            "atendentes": atendentes,
+            "administradores": admins
+        })
+    

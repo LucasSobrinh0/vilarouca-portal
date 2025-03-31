@@ -1,256 +1,377 @@
 /* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #111;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+}
+
+/* ========== NAVBAR SUPERIOR ========== */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #222;
+}
+
+/* Parte esquerda da navbar (hamburguer + logo) */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Botão hamburguer (para mobile) */
+.toggle-btn {
+  display: none; /* só aparece em telas pequenas */
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.navbar-logo h1 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0;
+}
+
+.navbar-menu .nav-link {
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Dropdown do perfil */
+.dropdown-menu {
+  background-color: #222;
+  border: none;
+}
+
+.dropdown-item {
+  color: #fff;
+  transition: background-color 0.3s;
+}
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+/* ========== LAYOUT GERAL ========== */
+.d-flex {
+  display: flex; /* Flex container para sidebar e conteúdo principal */
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+  width: 240px;
+  min-height: calc(100vh - 60px); /* Ajusta se quiser exato, levando em conta a altura da navbar (~60px) */
+  background-color: #000;
+  border-right: 1px solid #222;
+  padding: 1rem 0;
+  transition: transform 0.3s ease;
+}
+
+/* Lista e links */
+.sidebar nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ccc;
+  text-decoration: none;
+  padding: 0.6rem 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Link ativo */
+.sidebar a.active {
+  background-color: #0f62fe;
+  color: #fff;
+}
+
+/* Hover links */
+.sidebar a:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+/* ========== CONTEÚDO PRINCIPAL ========== */
+.main-content {
+  flex: 1; /* ocupa o espaço restante à direita da sidebar */
+  padding: 1rem 2rem;
+}
+
+/* ========== RESPONSIVIDADE ========== */
+@media (max-width: 992px) {
+  /* Ajuste a altura se a navbar for mais alta */
+  .sidebar {
+    min-height: calc(100vh - 70px);
   }
-  
-  body {
-    background-color: #111;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    min-height: 100vh;
-  }
-  
-  /* ========== NAVBAR SUPERIOR ========== */
-  
+}
+
+@media (max-width: 768px) {
   .navbar {
-    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #222;
   }
-  
-  /* Parte esquerda da navbar (hamburguer + logo) */
-  .navbar-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  /* Botão hamburguer (para mobile) */
+
+  /* Mostra o botão hamburguer apenas no mobile */
   .toggle-btn {
-    display: none; /* só aparece em telas pequenas */
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #fff;
-    cursor: pointer;
+    display: block;
   }
-  
-  .navbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .navbar-logo img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-  }
-  
-  .navbar-logo h1 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin: 0;
-  }
-  
-  .navbar-menu .nav-link {
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  /* Dropdown do perfil */
-  .dropdown-menu {
-    background-color: #222;
-    border: none;
-  }
-  
-  .dropdown-item {
-    color: #fff;
-    transition: background-color 0.3s;
-  }
-  .dropdown-item:hover {
-    color: #fff;
-    background-color: #333;
-  }
-  
-  /* ========== LAYOUT GERAL ========== */
-  .d-flex {
-    display: flex; /* Flex container para sidebar e conteúdo principal */
-  }
-  
-  /* ========== SIDEBAR ========== */
+
+  /* Ao invés de sidebar ficar sempre aparente, vamos esconder quando não tiver a classe 'open' */
   .sidebar {
-    width: 240px;
-    min-height: calc(100vh - 60px); /* Ajusta se quiser exato, levando em conta a altura da navbar (~60px) */
-    background-color: #000;
-    border-right: 1px solid #222;
-    padding: 1rem 0;
-    transition: transform 0.3s ease;
+    position: fixed;
+    top: 60px;       /* altura da navbar */
+    left: 0;
+    height: calc(100vh - 60px);
+    transform: translateX(-100%); /* escondida por padrão */
+    z-index: 999;   /* sobrepõe o conteúdo */
   }
-  
-  /* Lista e links */
-  .sidebar nav ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+
+  /* Quando tiver a classe .open, a sidebar aparece */
+  .sidebar.open {
+    transform: translateX(0);
   }
-  
-  .sidebar li {
-    margin: 0.5rem 0;
-  }
-  
-  .sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #ccc;
-    text-decoration: none;
-    padding: 0.6rem 1rem;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  /* Link ativo */
-  .sidebar a.active {
-    background-color: #0f62fe;
-    color: #fff;
-  }
-  
-  /* Hover links */
-  .sidebar a:hover {
-    background-color: #222;
-    color: #fff;
-  }
-  
-  /* ========== CONTEÚDO PRINCIPAL ========== */
+
+  /* O conteúdo principal preenche a tela se a sidebar estiver oculta */
   .main-content {
-    flex: 1; /* ocupa o espaço restante à direita da sidebar */
-    padding: 1rem 2rem;
+    padding: 1rem;
+    margin-left: 0; /* não ocupa o espaço da sidebar */
   }
-  
-  /* ========== RESPONSIVIDADE ========== */
-  @media (max-width: 992px) {
-    /* Ajuste a altura se a navbar for mais alta */
-    .sidebar {
-      min-height: calc(100vh - 70px);
-    }
+
+  /* A .d-flex vira coluna somente quando a sidebar estiver oculta, mas isso depende do design que você quer */
+  .d-flex {
+    flex-direction: column;
   }
-  
-  @media (max-width: 768px) {
-    .navbar {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-  
-    /* Mostra o botão hamburguer apenas no mobile */
-    .toggle-btn {
-      display: block;
-    }
-  
-    /* Ao invés de sidebar ficar sempre aparente, vamos esconder quando não tiver a classe 'open' */
-    .sidebar {
-      position: fixed;
-      top: 60px;       /* altura da navbar */
-      left: 0;
-      height: calc(100vh - 60px);
-      transform: translateX(-100%); /* escondida por padrão */
-      z-index: 999;   /* sobrepõe o conteúdo */
-    }
-  
-    /* Quando tiver a classe .open, a sidebar aparece */
-    .sidebar.open {
-      transform: translateX(0);
-    }
-  
-    /* O conteúdo principal preenche a tela se a sidebar estiver oculta */
-    .main-content {
-      padding: 1rem;
-      margin-left: 0; /* não ocupa o espaço da sidebar */
-    }
-  
-    /* A .d-flex vira coluna somente quando a sidebar estiver oculta, mas isso depende do design que você quer */
-    .d-flex {
-      flex-direction: column;
-    }
-  }
-  
-  /*************************************
-  FORMULÁRIO DE CADASTRO (USUÁRIOS)
+}
+
+/*************************************
+FORMULÁRIO DE CADASTRO (USUÁRIOS)
 **************************************/
 
 /* Container geral do formulário */
 .register-container {
-  background-color: #1a1a1a;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
-  margin: 2rem auto;   /* centraliza na tela */
-  padding: 2rem;
+background-color: #1a1a1a;
+border-radius: 12px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+max-width: 500px;
+margin: 2rem auto;   /* centraliza na tela */
+padding: 2rem;
 }
 
 .register-container h2 {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
+text-align: center;
+font-size: 1.8rem;
+margin-bottom: 1rem;
 }
 
 /* Form em coluna */
 .register-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+display: flex;
+flex-direction: column;
+gap: 1rem;
 }
 
 /* Inputs e Select */
 .register-container input,
 .register-container select {
-  padding: 0.8rem 1rem;
-  background-color: #222;
-  border: 1px solid #333;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.3s;
+padding: 0.8rem 1rem;
+background-color: #222;
+border: 1px solid #333;
+border-radius: 8px;
+color: #fff;
+font-size: 1rem;
+outline: none;
+transition: border-color 0.3s;
 }
 
 .register-container input:focus,
 .register-container select:focus {
-  border-color: #0f62fe;
+border-color: #0f62fe;
 }
 
 /* Botão */
 .register-container button {
-  padding: 0.8rem;
-  background-color: #0f62fe;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 0.5rem;
+padding: 0.8rem;
+background-color: #0f62fe;
+color: #fff;
+border: none;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.3s;
+margin-top: 0.5rem;
 }
 
 .register-container button:hover {
-  background-color: #0353e9;
+background-color: #0353e9;
 }
 
 /* Responsivo (caso queira ajustar tamanhos em mobile) */
 @media (max-width: 768px) {
-  .register-container {
-    margin: 1.5rem auto;
-    padding: 1rem;
-  }
-
-  .register-container h2 {
-    font-size: 1.4rem;
-  }
+.register-container {
+  margin: 1.5rem auto;
+  padding: 1rem;
 }
+
+.register-container h2 {
+  font-size: 1.4rem;
+}
+}
+
+.card-dashboard {
+border-radius: 1rem;
+transition: transform 0.3s ease;
+}
+
+.card-dashboard:hover {
+transform: scale(1.03);
+}
+
+.bg-gradient-primary {
+background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.bg-gradient-success {
+background: linear-gradient(135deg, #28a745, #1e7e34);
+}
+
+.bg-gradient-info {
+background: linear-gradient(135deg, #17a2b8, #117a8b);
+}
+
+.bg-gradient-warning {
+background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+.shadow {
+box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+}
+
+.table-container-custom {
+overflow-x: auto;
+background-color: #1a1a1a;
+border-radius: 12px;
+padding: 1rem;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+margin-bottom: 3rem;
+}
+
+.custom-table {
+width: 100%;
+border-collapse: collapse;
+text-align: center;
+color: #fff;
+background-color: #111;
+border-radius: 12px;
+overflow: hidden;
+}
+
+.custom-table thead {
+background-color: #222;
+}
+
+.custom-table th, .custom-table td {
+padding: 0.8rem 1rem;
+border-bottom: 1px solid #333;
+vertical-align: middle;
+}
+
+.custom-table th {
+font-weight: 600;
+color: #ccc;
+text-transform: uppercase;
+font-size: 0.9rem;
+}
+
+.custom-table tbody tr:hover {
+background-color: #1f1f1f;
+transition: 0.3s ease;
+}
+
+.custom-table .role-badge {
+display: inline-block;
+padding: 0.3rem 0.6rem;
+border-radius: 999px;
+font-size: 0.75rem;
+font-weight: bold;
+color: #fff;
+}
+
+.custom-table .role-cliente {
+background-color: #28a745;
+}
+
+.custom-table .role-atendente {
+background-color: #17a2b8;
+}
+
+.custom-table .role-admin {
+background-color: #ffc107;
+color: #000;
+}
+
+.custom-table .btn-action {
+padding: 0.4rem 0.8rem;
+border: none;
+border-radius: 6px;
+cursor: pointer;
+font-size: 0.85rem;
+font-weight: 600;
+transition: background-color 0.3s ease;
+}
+
+.custom-table .btn-edit {
+background-color: #0d6efd;
+color: white;
+}
+
+.custom-table .btn-edit:hover {
+background-color: #084298;
+}
+
+.custom-table .btn-delete {
+background-color: #dc3545;
+color: white;
+}
+
+.custom-table .btn-delete:hover {
+background-color: #a71d2a;
+}
+

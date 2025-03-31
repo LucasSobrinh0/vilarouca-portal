@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import UserCreateView, UserListView, UserUpdateView, UserDestroyView, CompanyListView, CompanyCreateView, CompanyUpdateView, CompanyDestroyView, CustomTokenObtainPairView, CurrentUserView
+from .views import UserCreateView, UserListView, UserUpdateView, UserDestroyView, CompanyListView, CompanyCreateView, CompanyUpdateView, CompanyDestroyView, CustomTokenObtainPairView, CurrentUserView, DashboardUsuariosAPIView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'), # Gera o token JWT ao fazer login
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Atualiza o token JWT
     path('current-user/', CurrentUserView.as_view(), name='current-user'),
+    path('dashboardUsuarios/', DashboardUsuariosAPIView.as_view(), name='dashboard'),
 ]
 
 urlpatterns += [
